@@ -64,7 +64,12 @@ async def analyze_pushup(video_frame: UploadFile):
         angle = calculate_angle(shoulder_xy, elbow_xy, wrist_xy)
 
         # Determine state
-        state = "down" if angle > 160 else "up"
+        if angle > 130:
+            state = "down"
+        elif angle < 90:
+            state = "up"
+        else:
+            state = "down"
 
         return {"angle": angle, "state": state}
 
